@@ -51,6 +51,12 @@ public class ChooseAccountSwing {
                 Game.getInstance().m = new Mage(Game.getInstance().selectedAccount.characters.get(1).name, Game.getInstance().selectedAccount.characters.get(1).level, Game.getInstance().selectedAccount.characters.get(1).XP);
                 Game.getInstance().player = Game.getInstance().m;
                 genMap("Main");
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                MainMapSwing m = new MainMapSwing(frame);
+                m.show();
+
             }
         });
         this.Rogue.addActionListener(new ActionListener() {
@@ -58,6 +64,11 @@ public class ChooseAccountSwing {
                 Game.getInstance().r =  new Rogue(Game.getInstance().selectedAccount.characters.get(2).name, Game.getInstance().selectedAccount.characters.get(2).level, Game.getInstance().selectedAccount.characters.get(2).XP);
                 Game.getInstance().player = Game.getInstance().r;
                 genMap("Main");
+                frame.getContentPane().removeAll();
+                frame.revalidate();
+                frame.repaint();
+                MainMapSwing m = new MainMapSwing(frame);
+                m.show();
             }
         });
 
