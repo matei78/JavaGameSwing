@@ -245,19 +245,10 @@ public class MainMapSwing {
             }
             case CellEntityType.ENEMY -> {
                 this.action.setText("Battle begin");
-                Enemy e = new Enemy();
-                //String z = Fight(e);
-                if (Game.getInstance().player.currentHealth <= 0) {
-                    System.out.println("You died. Game over");
-                    break; // ies din toata functia
-                } else {
-                    Game.getInstance().player.RegenHealth(Game.getInstance().player.currentHealth);
-                    Game.getInstance().player.RegenMana(100);
-                    Random r = new Random();
-                    int rxp = r.nextInt(3) + 1;
-                    Game.getInstance().player.XP = Game.getInstance().player.XP + rxp;
-
-                }
+                BattleSwing b = new BattleSwing(frame);
+                b.show();
+                if(Game.getInstance().player.currentHealth > 0)
+                    action.setText("You won the battle");
             }
             case CellEntityType.PORTAL -> {
                 this.action.setText("You landed on portal");

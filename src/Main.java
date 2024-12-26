@@ -18,7 +18,7 @@ public class Main {
             } catch (InvalidCommandException e) {
                 System.out.println("Invalid command");
             }
-            if (game.gameOver == false)
+            if (game.gameOver == false)g
                 game.Play("Main");
             game.w = null;
             game.m = null;
