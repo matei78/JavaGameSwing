@@ -247,8 +247,26 @@ public class MainMapSwing {
                 this.action.setText("Battle begin");
                 BattleSwing b = new BattleSwing(frame);
                 b.show();
-                if(Game.getInstance().player.currentHealth > 0)
+                if(Game.getInstance().player.currentHealth > 0) {
                     action.setText("You won the battle");
+
+                    Game.getInstance().player.RegenHealth(Game.getInstance().player.currentHealth);
+                    Game.getInstance().player.RegenMana(100);
+                    Random r = new Random();
+                    int rxp = r.nextInt(3) + 1;
+                    Game.getInstance().player.XP = Game.getInstance().player.XP + rxp;
+
+                    String lvl = "Level  " + Game.getInstance().player.level;
+                    this.showLevel.setText(lvl);
+                    String xp = "XP  " + Game.getInstance().player.XP;
+                    this.showXP.setText(xp);
+                    String health = "Health  " + Game.getInstance().player.currentHealth;
+                    this.showHealth.setText(health);
+                    String mana = "Mana  " + Game.getInstance().player.currentMana;
+                    this.showMana.setText(mana);
+
+                }
+
             }
             case CellEntityType.PORTAL -> {
                 this.action.setText("You landed on portal");

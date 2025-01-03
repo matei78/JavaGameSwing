@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public abstract class Character1 extends Entity {
+public abstract class Character1 extends Entity{
     public String name;
     public String profession;
     public int XP;
@@ -41,6 +41,11 @@ public abstract class Character1 extends Entity {
     }
 
     @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    @Override
     public void receiveDamage(int damage) {
         Random rand = new Random();
         int x = rand.nextInt(2);
@@ -66,28 +71,8 @@ public abstract class Character1 extends Entity {
             return damage;
         }
 
-        if(ability instanceof Earth) {
-            if(enemy.earth == false) {
-
-                damage = damage + ability.damage;
-            }
-            else
-                System.out.println("Enemy dodged Earth");
-        }
-        if(ability instanceof Ice) {
-            if(enemy.ice == false) {
-                damage = damage + ability.damage;
-            }
-            else
-                System.out.println("Enemy dodged Ice");
-        }
-        if(ability instanceof Fire) {
-            if(enemy.fire == false) {
-                damage = damage + ability.damage;
-            }
-            else
-                System.out.println("Enemy dodged Fire");
-        }
+        enemy.accept(ability);
+        damage = damage + ability.damage;
         if(damage > 100)
             damage = 100;
         this.XP = this.XP + 2;

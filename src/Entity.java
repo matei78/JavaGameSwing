@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-public abstract class Entity implements Battle {
+public abstract class Entity implements Battle,Element {
     public ArrayList<Spell> Abilities;
     public int currentHealth, maxHealth;
     public int currentMana, maxMana;

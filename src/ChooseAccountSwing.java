@@ -35,8 +35,9 @@ public class ChooseAccountSwing {
 
         this.Warrior.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Game.getInstance().w = new Warrior(Game.getInstance().selectedAccount.characters.get(0).name, Game.getInstance().selectedAccount.characters.get(0).level, Game.getInstance().selectedAccount.characters.get(0).XP);
-                Game.getInstance().player = Game.getInstance().w;
+                //Game.getInstance().w = new Warrior(Game.getInstance().selectedAccount.characters.get(0).name, Game.getInstance().selectedAccount.characters.get(0).level, Game.getInstance().selectedAccount.characters.get(0).XP);
+                //Game.getInstance().player = Game.getInstance().w;
+                Game.getInstance().player = CharacterFactory.getType("Warrior", Game.getInstance().selectedAccount.characters.get(0).name, Game.getInstance().selectedAccount.characters.get(0).level, Game.getInstance().selectedAccount.characters.get(0).XP);
                 genMap("Main");
 
                 frame.getContentPane().removeAll();
@@ -48,8 +49,9 @@ public class ChooseAccountSwing {
         });
         this.Mage.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Game.getInstance().m = new Mage(Game.getInstance().selectedAccount.characters.get(1).name, Game.getInstance().selectedAccount.characters.get(1).level, Game.getInstance().selectedAccount.characters.get(1).XP);
-                Game.getInstance().player = Game.getInstance().m;
+                //Game.getInstance().m = new Mage(Game.getInstance().selectedAccount.characters.get(1).name, Game.getInstance().selectedAccount.characters.get(1).level, Game.getInstance().selectedAccount.characters.get(1).XP);
+                //Game.getInstance().player = Game.getInstance().m;
+                Game.getInstance().player = CharacterFactory.getType("Mage", Game.getInstance().selectedAccount.characters.get(0).name, Game.getInstance().selectedAccount.characters.get(0).level, Game.getInstance().selectedAccount.characters.get(0).XP);
                 genMap("Main");
                 frame.getContentPane().removeAll();
                 frame.revalidate();
@@ -61,8 +63,9 @@ public class ChooseAccountSwing {
         });
         this.Rogue.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Game.getInstance().r =  new Rogue(Game.getInstance().selectedAccount.characters.get(2).name, Game.getInstance().selectedAccount.characters.get(2).level, Game.getInstance().selectedAccount.characters.get(2).XP);
-                Game.getInstance().player = Game.getInstance().r;
+                //Game.getInstance().r =  new Rogue(Game.getInstance().selectedAccount.characters.get(2).name, Game.getInstance().selectedAccount.characters.get(2).level, Game.getInstance().selectedAccount.characters.get(2).XP);
+                //Game.getInstance().player = Game.getInstance().r;
+                Game.getInstance().player = CharacterFactory.getType("Rogue", Game.getInstance().selectedAccount.characters.get(0).name, Game.getInstance().selectedAccount.characters.get(0).level, Game.getInstance().selectedAccount.characters.get(0).XP);
                 genMap("Main");
                 frame.getContentPane().removeAll();
                 frame.revalidate();

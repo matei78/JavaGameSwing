@@ -30,7 +30,7 @@ public class BattleSwing {
         dialog.setLocationRelativeTo(frame);
 
         this.exit = new JButton("Exit");
-        this.status = new JLabel("status");
+        this.status = new JLabel("");
         this.chHealth = new JLabel("Health: " + Game.getInstance().player.currentHealth);
         this.chMana = new JLabel("Mana: " + Game.getInstance().player.currentMana);
         this.enHealth = new JLabel("Health: " + this.enemy.currentHealth);
@@ -117,9 +117,69 @@ public class BattleSwing {
          });
          this.abilityAttack.addActionListener(new ActionListener() {
              public void actionPerformed(ActionEvent e) {
-                 status.setText("Executing Ability");
-                 AbilityChoiceSwing j = new AbilityChoiceSwing(frame);
-                 j.show();
+                 boolean icee = (Game.getInstance().player.currentMana >= 10 && Game.getInstance().player.Abilities.contains(new Ice()));
+                 boolean firee = (Game.getInstance().player.currentMana >= 20 && Game.getInstance().player.Abilities.contains(new Fire()));
+                 boolean earthe = (Game.getInstance().player.currentMana >= 50 && Game.getInstance().player.Abilities.contains(new Earth()));
+                 System.out.println(Game.getInstance().player.Abilities.toString());
+                 System.out.println((enemy.ice ? "ice": " ") + (enemy.fire ? "fire": " ") + (enemy.earth ? "earth": " "));
+                 if(!Game.getInstance().player.Abilities.isEmpty() && (icee || firee || earthe)) {
+                     status.setText("Executing Ability");
+                     AbilityChoiceSwing j = new AbilityChoiceSwing(frame);
+                     j.show();
+                     int nr = -1;
+                     if (j.spell.equals("Fire")) {
+                         for (int i = 0; i < Game.getInstance().player.Abilities.size(); i++) {
+                             if (Game.getInstance().player.Abilities.get(i) instanceof Fire) {
+                                 nr = i;
+                                 break;
+                             }
+                         }
+                         Game.getInstance().player.UseAbility(new Fire(), enemy, nr);
+                     }
+                     if (j.spell.equals("Ice")) {
+                         for (int i = 0; i < Game.getInstance().player.Abilities.size(); i++) {
+                             if (Game.getInstance().player.Abilities.get(i) instanceof Ice) {
+                                 nr = i;
+                                 break;
+                             }
+                         }
+                         Game.getInstance().player.UseAbility(new Ice(), enemy, nr);
+                     }
+                     if (j.spell.equals("Earth")) {
+                         for (int i = 0; i < Game.getInstance().player.Abilities.size(); i++) {
+                             if (Game.getInstance().player.Abilities.get(i) instanceof Earth) {
+                                 nr = i;
+                                 break;
+                             }
+                         }
+                         Game.getInstance().player.UseAbility(new Earth(), enemy, nr);
+                     }
+                     if(enemy.currentHealth > 0)
+                         Game.getInstance().EnemyAttack(enemy);
+                     if(Game.getInstance().player.currentHealth <= 0) {
+                         status.setText("You died");
+
+                     }
+                     if(enemy.currentHealth <= 0) {
+                         status.setText("You won");
+                         dialog.dispose();
+
+                         //frame.getContentPane();
+
+
+
+                     }
+
+                     chHealth.setText("Health: " + Game.getInstance().player.currentHealth);
+                     chMana.setText("Mana: " + Game.getInstance().player.currentMana);
+                     enHealth.setText("Health: " + enemy.currentHealth);
+                     enMana.setText("Mana: " + enemy.currentMana);
+
+                     dialog.revalidate();
+                     dialog.repaint();
+                 }
+                 else
+                     status.setText("Cannot use ability");
              }
          });
 

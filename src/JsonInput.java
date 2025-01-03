@@ -74,12 +74,16 @@ public class JsonInput {
                             Integer experience = ((Long) charJson.get("experience")).intValue();
 
                             Character1 newCharacter = null;
+                            /*
                             if (profession.equals("Warrior"))
                                 newCharacter = new Warrior(cname, experience, lvl);
                             if (profession.equals("Rogue"))
                                 newCharacter = new Rogue(cname, experience, lvl);
                             if (profession.equals("Mage"))
                                 newCharacter = new Mage(cname, experience, lvl);
+
+                             */
+                            newCharacter = CharacterFactory.getType(profession, cname, experience, lvl);
                             characters.add(newCharacter);
                         }
                     } catch (Exception e) {
@@ -87,8 +91,15 @@ public class JsonInput {
                     }
 
                     // Crearea obiectului Account
-                    Account.Information information = new Account.Information(credentials, favoriteGames, name, country);
-                    Account account = new Account(characters, gamesNumber, information);
+                    //Account.Information information = new Account.Information(credentials, favoriteGames, name, country);
+                    Account account = new Account.Information()
+                            .credentials(credentials)
+                                    .favoriteGames(favoriteGames)
+                                            .country(country)
+                                                    .name(name)
+                                                            .build();
+                    account.characters = characters;
+                    account.no_games = gamesNumber;
                     accounts.add(account);
                 }
             } catch (IOException | ParseException e) {

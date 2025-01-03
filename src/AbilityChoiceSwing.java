@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AbilityChoiceSwing {
     public JButton fire;
@@ -12,6 +14,7 @@ public class AbilityChoiceSwing {
     public JLabel fireDamage;
     public JLabel status;
     public JDialog dialog2;
+    public String spell;
 
     public AbilityChoiceSwing(JFrame frame) {
         this.dialog2 = new JDialog(frame, "Ability", true);
@@ -26,7 +29,7 @@ public class AbilityChoiceSwing {
         this.iceDamage = new JLabel("Damage: 20");
         this.earthCost = new JLabel("Cost: 50");
         this.earthDamage = new JLabel("Damage: 50");
-        this.status = new JLabel("ssss");
+        this.status = new JLabel("");
         ImageIcon f, i ,e;
         f = new ImageIcon("C:\\Users\\matei\\IdeaProjects\\Tema2\\img\\fire.jpg");
         i = new ImageIcon("C:\\Users\\matei\\IdeaProjects\\Tema2\\img\\ice.jpg");
@@ -56,6 +59,40 @@ public class AbilityChoiceSwing {
         this.dialog2.add(this.iceDamage);
         this.dialog2.add(this.status);
         this.dialog2.setLayout(null);
+
+        this.fire.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(Game.getInstance().player.Abilities.contains(new Fire()) && Game.getInstance().player.currentMana >= 20) {
+                    spell = "Fire";
+                    dialog2.dispose();
+                }
+                else
+                {
+                    status.setText("Fire Not available");
+                }
+            }
+        });
+        this.ice.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(Game.getInstance().player.Abilities.contains(new Ice()) && Game.getInstance().player.currentMana >= 10) {
+                    spell = "Ice";
+                    dialog2.dispose();
+
+                }
+                else
+                    status.setText("Ice Not available");
+            }
+        });
+        this.earth.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if(Game.getInstance().player.Abilities.contains(new Earth()) && Game.getInstance().player.currentMana >= 50) {
+                    spell = "Earth";
+                    dialog2.dispose();
+                }
+                else
+                    status.setText("Earth Not available");
+            }
+        });
 
 
     }

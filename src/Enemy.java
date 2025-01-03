@@ -47,6 +47,12 @@ public class Enemy extends Entity {
         }
     }
 
+
+    @Override
+    public void accept(Visitor v) {
+        v.visit(this);
+    }
+
     public String getEDetails() {
         return "Enemy " + this.currentHealth + " " + this.currentMana + " " + (this.ice?"Ice":"") + " " + (this.earth?"Earth":"") + " " + (this.fire?"Fire":"");
     }
@@ -80,21 +86,9 @@ public class Enemy extends Entity {
                 return damage;
             }
 
-            if (ability instanceof Earth) {
-                if (c.earth == false) {
-                    damage = e.damage;
-                }
-            }
-            if (ability instanceof Ice) {
-                if (c.ice == false) {
-                    damage = i.damage;
-                }
-            }
-            if (ability instanceof Fire) {
-                if (c.fire == false) {
-                    damage = f.damage;
-                }
-            }
+            Game.getInstance().player.accept(ability);
+            damage = ability.damage;
+
             if (damage > 100)
                 damage = 100;
             return damage;
